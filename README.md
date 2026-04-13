@@ -68,13 +68,3 @@ iam-cloudformation-lab/
 ├── iam-template.yaml
 └── README.md
 ```
-
----
-
-## 🎯 Key Learning Outcomes
-
-* IAM user and group management
-* AWS CloudFormation infrastructure automation
-* Secure password handling using Secrets Manager
-* Applying least privilege access control
-* Git-based infrastructure deployment (GitSync)
