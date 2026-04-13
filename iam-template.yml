@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM Lab Resource
+
+Resources:
+
+  UserPasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: IAMUserPasswordTemplate
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "user"}'
+        GenerateStringKey: "password"
+        PasswordLength: 12
+        ExcludeCharacters: '"@/\'
+
+  S3Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: S3Group
+      Policies:
+        - PolicyName: S3ListGroup
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:ListAllMyBuckets
+                Resource: "*"
+
+  EC2Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: EC2Group
+      Policies:
+        - PolicyName: EC2Policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeInstances
+                  - ec2:RunInstances
+                Resource: "*"
+
+  EC2User1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user1
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
+        PasswordResetRequired: true
+
+  EC2User2:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user2
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
+        PasswordResetRequired: true
+
+  S3User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: s3-user
+      Groups:
+        - !Ref S3Group
+      LoginProfile:
+        Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
+        PasswordResetRequired: true
