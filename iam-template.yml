@@ -6,7 +6,7 @@ Resources:
   UserPasswordSecret:
     Type: AWS::SecretsManager::Secret
     Properties:
-      Name: IAMUserPasswordTemplate
+      Name: !Sub "IAMUserPasswordTemplate-${AWS::StackName}"
       GenerateSecretString:
         SecretStringTemplate: '{"username": "user"}'
         GenerateStringKey: "password"
