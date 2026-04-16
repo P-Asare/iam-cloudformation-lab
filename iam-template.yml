@@ -29,7 +29,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - iam:ChangePassword
-                Resource: !Sub "arn:aws:iam::${AWS::AccountId}:user/${aws:username}"
+                Resource: !Sub "arn:aws:iam::${AWS::AccountId}:user/\${aws:username}"
 
   EC2Group:
     Type: AWS::IAM::Group
@@ -48,7 +48,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - iam:ChangePassword
-                Resource: !Sub "arn:aws:iam::${AWS::AccountId}:user/${aws:username}"
+                Resource: !Sub "arn:aws:iam::${AWS::AccountId}:user/\${aws:username}"
 
   EC2User1:
     Type: AWS::IAM::User
