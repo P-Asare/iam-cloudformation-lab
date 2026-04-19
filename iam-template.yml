@@ -44,6 +44,7 @@ Resources:
                 Action:
                   - ec2:RunInstances
                   - ec2:CreateKeyPair
+                  - ec2:CreateTags
                   - iam:ListInstancesProfiles
                   - ds:DescribeDirectories
                   - ec2:DescribeInstances
