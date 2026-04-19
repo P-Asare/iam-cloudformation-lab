@@ -42,6 +42,10 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
+                  - ec2:RunInstances
+                  - ec2:CreateKeyPair
+                  - iam:ListInstancesProfiles
+                  - ds:DescribeDirectories
                   - ec2:DescribeInstances
                   - ec2:DescribeImages
                   - ec2:DescribeSubnets
