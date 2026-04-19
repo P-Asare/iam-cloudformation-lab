@@ -1,1 +1,3 @@
 template-file-path: iam-template.yml
+parameters: {}
+tags: {}
