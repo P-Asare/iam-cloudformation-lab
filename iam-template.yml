@@ -91,3 +91,13 @@ Resources:
       LoginProfile:
         Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
         PasswordResetRequired: true
+
+  S4User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: s4-user
+      Groups:
+        - !Ref S3Group
+      LoginProfile:
+        Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
+        PasswordResetRequired: true
