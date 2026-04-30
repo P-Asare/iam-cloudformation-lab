@@ -80,6 +80,15 @@ Resources:
       LoginProfile:
         Password: !Sub "{{resolve:secretsmanager:${UserPasswordSecret}:SecretString:password}}"
         PasswordResetRequired: true
+      Policies:
+        - PolicyName: DenyEC2RunInstances
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Deny
+                Action:
+                  - ec2:RunInstances
+                Resource: "*"
 
   S3User:
     Type: AWS::IAM::User
