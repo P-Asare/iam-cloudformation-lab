@@ -46,7 +46,6 @@ Resources:
                   - ec2:CreateKeyPair
                   - ec2:CreateTags
                   - iam:ListInstancesProfiles
-                  - ds:DescribeDirectories
                   - ec2:DescribeInstances
                   - ec2:DescribeImages
                   - ec2:DescribeSubnets
